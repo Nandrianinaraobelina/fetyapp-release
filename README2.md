@@ -1,233 +1,77 @@
-FetyMada v2.1.1
+Voici les commandes à exécuter dans votre terminal (à la racine du projet) :
+────────────────────────────────────────────────────────────────────────────────
 
-**FetyMada** est une application mobile Flutter permettant de découvrir, créer et gérer des événements à Madagascar en temps réel.
 
-Elle intègre une carte interactive basée sur **OpenStreetMap**, un système de chat, des événements géolocalisés et une synchronisation en temps réel avec Supabase.
+ 1. Changer l'icône (logo)
+Étape 1 — Préparer votre logo
+Placez votre nouveau fichier image dans le dossier  assets/ , par exemple :
+assets/mon_logo.png
+> Format recommandé : PNG, 1024×1024 px minimum, fond transparent.
 
----
 
-#  Fonctionnalités principales
 
-##  Carte interactive (OpenStreetMap)
+Étape 2 — Mettre à jour  pubspec.yaml 
+// yaml
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/mon_logo.png"   # ← ici
 
-* Affichage des événements sur une carte
-* Position GPS de l’utilisateur
-* Mode satellite (via tuiles externes)
-* Marqueurs personnalisés
 
-##  Géolocalisation
-
-* Détection automatique de la position utilisateur
-* Calcul de distance vers les événements
-* Événements proches
-
-##  Système social
-
-* Chat de groupe par événement
-* Messagerie privée avec organisateurs
-* Notifications en temps réel
-
-##  Média
-
-* Partage de photos et vidéos après événements
-* Likes et commentaires
-
-##  Avis
-
-* Système de notation 1 à 5 étoiles
-* Commentaires des participants
-
-##  Engagement
-
-* Favoris d’événements
-* Liste personnalisée
-
-##  Temps réel
-
-* Synchronisation Supabase
-* Messages instantanés
-* Mise à jour des événements live
-
----
-
-#  Stack technique
-
-* Flutter (Mobile App)
-* OpenStreetMap (flutter_map)
-* Supabase (Backend + Realtime)
-* Provider (State Management)
-* Go Router (Navigation)
-* Geolocator (GPS)
-* Geocoding (adresses)
-
----
-
-#  Installation
-
-## 1. Cloner le projet
-
-```bash
-git clone https://github.com/TON_USERNAME/fetymada.git
-cd fetymada
-```
-
----
-
-## 2. Installer les dépendances
-
-```bash
+  
+Étape 3 — Lancer la génération
+// bash
 flutter pub get
-```
+dart run flutter_launcher_icons
 
----
 
-## 3. Lancer l’application
+────────────────────────────────────────────────────────────────────────────────
 
-```bash
+
+
+ 2. Changer le nom
+Après avoir modifié les fichiers listés précédemment ( AndroidManifest.xml ,  Info.plist , etc.), exécutez :
+
+// bash
+# Nettoyer le cache
+flutter clean
+ 
+# Réinstaller les dépendances
+flutter pub get
+ 
+# Reconstruire l'application
 flutter run
-```
 
----
 
-#  Build APK (Release)
 
-## Générer APK release
+────────────────────────────────────────────────────────────────────────────────
 
-```bash
-flutter build apk --release
-```
 
- Fichier généré :
+3. Changer l'image du splash screen (optionnel)
+Dans  flutter_native_splash.yaml  :
+// yaml
+flutter_native_splash:
+  color: "#000000"
+  color_dark: "#000000"
+  image: assets/mon_splash.png    # ← si vous voulez une image
+  android_gravity: center
+  ios_content_mode: center
+  web: false
+Puis :
+// bash
+dart run flutter_native_splash:create
 
-```
-build/app/outputs/flutter-apk/app-release.apk
-```
 
----
+────────────────────────────────────────────────────────────────────────────────
 
-## Version optimisée
 
-```bash
-flutter build apk --release --split-per-abi
-```
-
----
-
-#  Configuration Supabase
-
-Créer un projet sur :
-
- https://supabase.com/
-
-Ajouter dans ton projet Flutter :
-
-```dart
-Supabase.initialize(
-  url: "YOUR_SUPABASE_URL",
-  anonKey: "YOUR_SUPABASE_ANON_KEY",
-);
-```
-
----
-
-#  Base de données (Supabase)
-
-Tables principales :
-
-* events
-* messages
-* event_chats
-* event_media
-* event_reviews
-* favorites
-* participants
-* notifications
-
----
-
-#  Carte OpenStreetMap
-
-Utilise flutter_map :
-
-```yaml
-urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-```
-
----
-
-#  Structure du projet
-
-```
-lib/
-├── core/
-│   ├── services/
-├── features/
-│   ├── map/
-│   ├── chat/
-│   ├── events/
-│   ├── media/
-│   ├── reviews/
-├── models/
-├── providers/
-├── screens/
-├── widgets/
-```
-
----
-
-# Aperçu des fonctionnalités
-
-* Carte des événements en temps réel
-* Chat entre utilisateurs et organisateurs
-* Publication de photos et vidéos
-* Événements proches selon GPS
-* Système de favoris
-
----
-
-#  Roadmap
-
-## V1 (Actuelle)
-
-* Carte OpenStreetMap
-* Événements
-* GPS utilisateur
-* Chat basique
-
-## V2
-
-* Assistant IA
-* Itinéraire navigation
-* Mode satellite
-
-## V3
-
-* Paiement billets
-* QR Code entrée
-* Streaming live événements
-
----
-
-#  Contribution
-
-Pull requests sont les bienvenues.
-
-```bash
-git checkout -b feature/new-feature
-git commit -m "Add new feature"
-git push origin feature/new-feature
-```
-
----
-
-#  Licence
-
-MIT License
-
----
-
-#  Développeur
-
-FetyMada Team 🇲🇬
-
-Application événementielle moderne pour Madagascar.
+Résumé des commandes essentielles
+┌───────────────────────────────┬───────────────────────────────────────┐
+│ Action                        │ Commande                              │
+├───────────────────────────────┼───────────────────────────────────────┤
+│  Installer les dépendances    │ flutter pub get                       │
+│  Générer les icônes Android   │ dart run flutter_launcher_icons       │
+│  Nettoyer le cache            │ flutter clean                         │
+│  Lancer l'app                 │ flutter run                           │
+│  Mettre à jour le splash      │ dart run flutter_native_splash:create │
+└───────────────────────────────┴───────────────────────────────────────
